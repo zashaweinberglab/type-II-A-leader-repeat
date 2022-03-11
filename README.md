@@ -84,7 +84,7 @@ Next, we run the UPGMA algorithm using the `neighbor` command from the Phylip so
 
 > `neighbor < demo-output/II-A-systems-for-figure.neighbor-stdin`
 
-(The `demo-output/II-A-systems-for-figure.neighbor-stdin` file tells the `neighbor` command to use the UPGMA algorithm instead of Neighbor-Joining, and it sets the input file.)
+(The `demo-output/II-A-systems-for-figure.neighbor-stdin` file tells the `neighbor` command to load the file `demo-output/II-A-systems-for-figure.phylip-distmat` and to use the UPGMA algorithm instead of Neighbor-Joining, and it sets the input file.  NOTE: the input file name is hardcoded within `demo-output/II-A-systems-for-figure.neighbor-stdin`. If you want to process a different file, you must either change this file, or interact with the `neighbor` program directly.)
 
 And save the output we need with a meaningful name:
 
