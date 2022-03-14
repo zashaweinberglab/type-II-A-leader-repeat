@@ -87,7 +87,7 @@ def DrawTree(node,context,nameToY,leafX,lengthFactor,x0,y0): # return our x,y co
         y=(y1+y2)/2.0
         return x,y
 
-def DrawFigure (context,x0,y0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree):
+def DrawFigure (context,x0,y0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree,noDrawTree):
 
     # gray lines along the sequences
     if False: # can't see the lines because they're blocked by the circles. Could do something with alpha, but I think the lines would just be distracting.
@@ -129,7 +129,7 @@ def DrawFigure (context,x0,y0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leaf
     context.select_font_face("Arial",cairo.FONT_SLANT_NORMAL,cairo.FONT_WEIGHT_NORMAL)
     context.set_source_rgb(0,0,0)
 
-    if tree:
+    if tree and not noDrawTree:
         treeLongestLen=TreeLongestLen(tree)
         targetTreeLen=totalTreeWidth
         #print("treeLongestLen=%f , target=%f" % (treeLongestLen,targetTreeLen))
@@ -181,6 +181,7 @@ parser.add_argument("--no-within-repeat",dest="noWithinRepeat",help="ignore pair
 parser.add_argument("--extend-repeat-by",help="move this many nucs on the 3' end of the leader into the 5' end of repeat, to look for hairpins that are just beyond the repeat",type=int,default=0,dest="moveNucsFromLeaderToRepeat")
 parser.add_argument("--tree-order",help="tree file output by clustalo that gives the desired order of the inputs",type=str,dest="treeOrderFileName")
 parser.add_argument("--phylip-tree",help="use this tree and plot the tree itself",type=str,dest="phylipTreeFileName")
+parser.add_argument("--no-draw-tree",help="Don't draw a tree, even if we're given one.  (But, sort the rows based on the tree, if desired.)",dest="noDrawTree",action="store_true")
 parser.add_argument("--max-leader-len",help="if a leader is longer than this amount, chop nucs from the 5' end to truncate it to this length",type=int,default=-1,dest="maxLeaderLen")
 parser.add_argument("--mark-training",help="mark examples that were part of training data, i.e. in the given file",type=str,dest="markTraining")
 parser.add_argument("--mark-experimented",help="mark the examples in the given file as being experimented upon",type=str,dest="markExperimented")
@@ -201,6 +202,7 @@ phylipTreeFileName=args.phylipTreeFileName
 maxLeaderLen=args.maxLeaderLen
 markTrainingFileName=args.markTraining
 markExperimentedFileName=args.markExperimented
+noDrawTree=args.noDrawTree
 
 leaderRepeatList=LoadLeaderRepeatFile(leaderRepeatsFileName,moveNucsFromLeaderToRepeat,maxLeaderLen)
 
@@ -394,7 +396,7 @@ with open(outFileName, 'w', newline='') as csvfile,open(htmlFileName,'w') as htm
 
     print("drawing figure")
 
-    DrawFigure (context,0,0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree)
+    DrawFigure (context,0,0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree,noDrawTree)
 
     x0,y0,width,height=virtualSurface.ink_extents()
     #print("%g,%g,%g,%g" % (x0,y0,width,height))
@@ -406,6 +408,6 @@ with open(outFileName, 'w', newline='') as csvfile,open(htmlFileName,'w') as htm
     pdfContext.set_source_rgb(1, 1, 1)
     pdfContext.fill()
 
-    DrawFigure (pdfContext,x0,y0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree)
+    DrawFigure (pdfContext,x0,y0,plotX,plotY,plotC,circDiameter,totalTreeWidth,leafX,maxX,maxY,stepX,nameAndYList,moveNucsFromLeaderToRepeat,trainingSet,experimentedSet,tree,noDrawTree)
         
     surface.show_page()
