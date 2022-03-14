@@ -18,6 +18,5 @@ perl src/abbrev-distmat.pl temp.distmat temp.phylip-distmat temp.phylip-tree tem
 
 python3 src/ChaseFigureFromFolding.py $1 -o $2 --use-prob --no-within-repeat --phylip-tree temp.my-names-phylip-tree
 
-rm $2
-rm $2.html
-
+rm -f $2
+rm -f $2.html

@@ -118,4 +118,5 @@ You can also generate the figure using the following command, if all required so
 
 You can draw all 4 figures with this command:
 
+> `src/make-4-figures.sh`
 
