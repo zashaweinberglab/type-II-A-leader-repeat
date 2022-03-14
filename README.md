@@ -20,6 +20,8 @@ As described in the paper, this data was split into training and test datasets, 
 
 Our initial test dataset for type II-C systems is in the directory `data/training-test/old/old-II-C--test.tab`. Subsequent analysis suggested that some of these systems might not be correctly classified, so we conservatively removed them the test dataset (see file `data/training-test/II-C--test.tab`).  Neither of these type II-C datasets have significant aggregate p-values.
 
+We used a subset of systems to draw Figure 5A.  These subsets are in the directory `data/figure-data`.
+
 ## About the scripts
 
 The scripts are almost exclusively written in Python.  The scripts are prefixed with "Chase", which was my code for this project.  For the Python scripts, a description of command line arguments and possible flags can be obtained by running the script with the flag `-h`. In summary, there are the following:
@@ -58,11 +60,13 @@ This process requires extra software that is not required by the other scripts, 
 
 The dots in this diagram show the probability that each nucleotide in the repeat is involved in a base pair with a nucleotide in the leader at thermodynamic equilibrium.  The tree at left shows the relationships between the sequences, and was computed using the UPGMA algorithm.  The UPGMA algorithm ensures that all leaves are at the same height, which is convenient for the figure.  Note that there was no intention to make the tree phylogenetically meaningful; it is just qualitatively depicting the similarities between the sequences.
 
-Here we draw the blue-dot figure for type II-A.  For this figure, we combined training and test systems, so that all systems were output at a maximum percent identity of 70%.  It would also be possible to plot all systems.  For types II-C, I-E and I-F, we used the `ChaseTrainingValidationTestData.py` script to remove similar systems until there were roughly 68 systems, but this is not necessary.
+Here we draw the blue-dot figure for type II-A.  For this figure, we combined training and test systems, so that all systems were output at a maximum percent identity of 70%.  It would also be possible to plot all systems.  For types II-C, I-E and I-F, we used the `ChaseTrainingValidationTestData.py` script to remove similar systems until there were roughly 68 systems, but this is not necessary.  The files with the reduced number of systems are in the directory `data/figure-data` of this repository.
 
 To combine the systems:
 
 > `cat data/training-test/II-A--training.tab data/training-test/II-A--test.tab > demo-output/II-A-systems-for-figure.tab`
+
+(This is equivalent to the file `data/figure-data/data/figure-data`.)
 
 Then we convert the repeat sequences into a FASTA-format file, for further processing:
 
