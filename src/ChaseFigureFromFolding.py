@@ -11,6 +11,8 @@ import argparse
 import random
 import re
 from operator import itemgetter
+import matplotlib
+matplotlib.use('Agg') # allow the screen to run even if we're not connect to an X Windows display
 from matplotlib import pyplot as plt
 from matplotlib import collections  as mc
 import cairo

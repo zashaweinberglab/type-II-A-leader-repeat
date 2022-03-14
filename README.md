@@ -8,7 +8,7 @@ The repository is freely available under version 3 of the GNU Public License (se
 
 ## Installation
 
-The scripts require Python version 3, a recent version of Perl and the bash interpreter.  The only non-standard Python library is the Python bindings for the [ViennaRNA library](https://www.tbi.univie.ac.at/RNA/)
+The scripts require Python version 3, a recent version of Perl and the bash interpreter.  The only non-standard Python library is the Python bindings for the [ViennaRNA library](https://www.tbi.univie.ac.at/RNA/)  You'll likely have to set the `PYTHONPATH` environment variable to point to the `site-packages` directory in which the Python bindings are installed.  The remaining Python libraries should be in the repository.  For the script to draw the diagrams in Figures 5A, note that the `skbio` module is defined in the package `scikit-bio`.
 
 To generate Figure 5A, the software packages Clustal Omega and Phylip are required, as explained below.
 
@@ -109,3 +109,13 @@ The figure is in the file `demo-output/II-A-systems-for-figure.figure.draw.pdf`,
 ![](demo-output/II-A-systems-for-figure.figure.draw.pdf.png)
 
 This figure was processed with a drawing program to augment it for the final figure.
+
+You can also generate the figure using the following command, if all required software is installed:
+
+> `src/make-figure.sh data/figure-data/II-A-systems-for-figure.tab II-A-figure`
+
+(The final output is the file `II-A-figure.draw.pdf`)
+
+You can draw all 4 figures with this command:
+
+
